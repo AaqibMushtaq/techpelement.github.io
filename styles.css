@@ -24,11 +24,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  gap: 30px;
   border-radius: 25px;
   color: #ffffff;
-  height: 55vh;
+  /* height: 55vh; */
 }
 
 .weather-side {
@@ -136,6 +135,7 @@ body {
   border-radius: 10px;
   display: flex;
   column-gap: 10px;
+  height: 180px;
 }
 
 .week-list > li {
@@ -212,7 +212,7 @@ body {
   transform: scale(0.95);
 }
 /* for tablet */
-@media (min-width: 760px) and (max-width: 1280px) {
+@media (min-width: 768px) and (max-width: 1280px) {
   body {
     width: 100%;
     display: flex;
@@ -227,24 +227,19 @@ body {
   }
   .container {
     display: flex;
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
+    gap: 20px;
   }
-  .weather-side {
-    width: 230px;
-    height: 75vh;
-    background-size: 400px 75vh;
-  }
-  .info-side {
-    width: 60%;
-  }
+
   .week-container {
     display: flex;
   }
   .week-list {
     overflow: auto;
     height: 180px;
+    margin: 10px 16px;
+  }
+  .week-list > li {
+    padding: 4px;
   }
   .weather-icon img {
     width: 60%;
@@ -252,7 +247,7 @@ body {
 }
 
 /* for phone */
-@media (min-width: 0px) and (max-width: 760px) {
+@media (min-width: 0px) and (max-width: 768px) {
   body {
     width: 100%;
     display: flex;
@@ -267,16 +262,18 @@ body {
     margin-top: 30px;
   }
   .weather-side {
-    width: 75%;
+    width: 100%;
   }
+
   .container {
     display: flex;
-
-    width: 100vw;
-    height: 100vh;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 0 10%;
   }
   .info-side {
-    width: 75%;
+    width: 100%;
   }
   .week-container {
     display: flex;
