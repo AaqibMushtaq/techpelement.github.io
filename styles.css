@@ -72,13 +72,7 @@ body {
 .location {
   display: inline-block;
   margin-top: 10px;
-}
-
-.location-icon {
-  display: inline-block;
-  height: 0.8em;
-  width: auto;
-  margin-right: 5px;
+  margin-left: 3px;
 }
 
 .weather-container {
@@ -105,13 +99,11 @@ body {
 .info-side {
   position: relative;
   float: left;
-  height: 100%;
   padding-top: 25px;
   border-radius: 25px;
   box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
   color: #ffffff;
   border: 1px solid whitesmoke;
-  height: 400px;
 }
 
 .today-info {
@@ -246,7 +238,6 @@ body {
   }
   .info-side {
     width: 60%;
-    height: 75vh;
   }
   .week-container {
     display: flex;
@@ -275,6 +266,9 @@ body {
     align-items: start;
     margin-top: 30px;
   }
+  .weather-side {
+    width: 75%;
+  }
   .container {
     display: flex;
 
@@ -282,8 +276,7 @@ body {
     height: 100vh;
   }
   .info-side {
-    width: 80%;
-    height: 70vh;
+    width: 75%;
   }
   .week-container {
     display: flex;

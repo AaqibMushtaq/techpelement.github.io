@@ -1,40 +1,33 @@
 document.getElementById("city").addEventListener("input", function () {
   var city = this.value;
-  console.log(city);
   getWeather(city);
-  console.log(getWeather);
 });
 
 async function getWeather() {
   try {
     var city = document.getElementById("city").value;
-    console.log("city name:", city);
 
     const response = await axios.get(
       "https://api.openweathermap.org/data/2.5/forecast",
       {
         params: {
-          //object
           q: city,
           appid: "9168ab7ec46cfc29547b356dea0a97db",
           units: "metric",
         },
       }
     );
-    console.log("api", response); // api
     const currentTemperature = response.data.list[0].main.temp;
     document.querySelector(".weather-temp").textContent =
       Math.round(currentTemperature) + "ºC";
 
     const forecastData = response.data.list;
-    console.log("forecast", forecastData); //arrary
     const dailyForecast = {};
 
     forecastData.forEach((data) => {
       const day = new Date(data.dt * 1000).toLocaleDateString("en-US", {
         weekday: "long",
       });
-      console.log("day", day);
       if (!dailyForecast[day]) {
         dailyForecast[day] = {
           minTemp: data.main.temp_min,
@@ -58,9 +51,7 @@ async function getWeather() {
     document.querySelector(".date-dayname").textContent =
       new Date().toLocaleDateString("en-US", { weekday: "long" });
     const date = new Date().toUTCString();
-    console.log("date", date);
     const extractedDateTime = date.slice(5, 16);
-    console.log("extrated", extractedDateTime);
     document.querySelector(".date-day").textContent =
       extractedDateTime.toLocaleString("en-US");
 
@@ -91,7 +82,6 @@ async function getWeather() {
 
     dayElements.forEach((dayElement, index) => {
       const day = Object.keys(dailyForecast)[index];
-      console.log(index, day, "day");
       const data = dailyForecast[day];
       dayElement.textContent = day;
       tempElements[index].textContent = `${Math.round(
