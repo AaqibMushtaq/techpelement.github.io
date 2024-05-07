@@ -3,6 +3,13 @@ document.getElementById("city").addEventListener("input", function () {
   getWeather(city);
 });
 
+function getCurrentHourString() {
+  const date = new Date();
+  const hours = date.getHours();
+
+  return hours > 9 ? `${hours}:00` : `0${hours}:00`;
+}
+
 async function getWeather() {
   try {
     var city = document.getElementById("city").value;
@@ -17,17 +24,18 @@ async function getWeather() {
         },
       }
     );
+
     const currentTemperature = response.data.list[0].main.temp;
     document.querySelector(".weather-temp").textContent =
       Math.round(currentTemperature) + "ºC";
 
     const forecastData = response.data.list;
     const dailyForecast = {};
-
-    forecastData.forEach((data) => {
+    forecastData.forEach((data, index) => {
       const day = new Date(data.dt * 1000).toLocaleDateString("en-US", {
         weekday: "long",
       });
+
       if (!dailyForecast[day]) {
         dailyForecast[day] = {
           minTemp: data.main.temp_min,
@@ -46,18 +54,28 @@ async function getWeather() {
           dailyForecast[day].maxTemp,
           data.main.temp_max
         );
+        dailyForecast[day].icon = data.dt_txt.includes(getCurrentHourString())
+          ? data.weather[0].icon
+          : dailyForecast[day].icon;
+        dailyForecast[day].description = data.dt_txt.includes(
+          getCurrentHourString()
+        )
+          ? data.weather[0].description
+          : dailyForecast[day].description;
       }
     });
+
     document.querySelector(".date-dayname").textContent =
       new Date().toLocaleDateString("en-US", { weekday: "long" });
     const date = new Date().toUTCString();
     const extractedDateTime = date.slice(5, 16);
+
     document.querySelector(".date-day").textContent =
       extractedDateTime.toLocaleString("en-US");
-
     const currentWeatherIconCode =
       dailyForecast[new Date().toLocaleDateString("en-US", { weekday: "long" })]
         .icon;
+
     const weatherIconElement = document.querySelector(".weather-icon");
     weatherIconElement.innerHTML = getWeatherIcon(currentWeatherIconCode);
 
@@ -79,7 +97,6 @@ async function getWeather() {
     const dayElements = document.querySelectorAll(".day-name");
     const tempElements = document.querySelectorAll(".day-temp");
     const iconElements = document.querySelectorAll(".day-icon");
-
     dayElements.forEach((dayElement, index) => {
       const day = Object.keys(dailyForecast)[index];
       const data = dailyForecast[day];
@@ -99,7 +116,6 @@ function getWeatherIcon(iconCode) {
   const iconSize = "@2x.png";
   return `<img src="${iconBaseUrl}${iconCode}${iconSize}" alt="Weather Icon">`;
 }
-
 document.addEventListener("DOMContentLoaded", function () {
   getWeather();
   setInterval(getWeather, 900000);
