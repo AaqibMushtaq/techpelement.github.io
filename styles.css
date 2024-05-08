@@ -39,7 +39,6 @@ body {
   width: 300px;
   transition: transform 300ms ease;
   transform: translateZ(0) scale(1.02) perspective(1000px);
-  float: left;
   border: 1px solid whitesmoke;
 }
 
@@ -96,7 +95,6 @@ body {
 
 .info-side {
   position: relative;
-  float: left;
   padding-top: 25px;
   border-radius: 25px;
   box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
@@ -118,7 +116,6 @@ body {
 }
 
 .today-info > div .title {
-  float: left;
   font-weight: 700;
 }
 
@@ -138,7 +135,6 @@ body {
 }
 
 .week-list > li {
-  float: left;
   padding: 15px;
   cursor: pointer;
   transition: 200ms ease-out;
@@ -242,6 +238,9 @@ body {
   }
   .weather-icon img {
     width: 60%;
+  }
+  .info-side {
+    width: 50%;
   }
 }
 
